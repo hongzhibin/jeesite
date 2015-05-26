@@ -1,7 +1,7 @@
 /**
  * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
-package com.thinkgem.jeesite.test.entity;
+package com.thinkgem.jeesite.modules.test.entity;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -10,7 +10,7 @@ import com.thinkgem.jeesite.common.persistence.DataEntity;
 /**
  * 主子表生成Entity
  * @author ThinkGem
- * @version 2015-04-06
+ * @version 2015-05-26
  */
 public class TestDataChild extends DataEntity<TestDataChild> {
 	

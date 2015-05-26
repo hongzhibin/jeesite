@@ -1,7 +1,7 @@
 /**
  * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
-package com.thinkgem.jeesite.test.service;
+package com.thinkgem.jeesite.modules.test.service;
 
 import java.util.List;
 
@@ -12,15 +12,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.service.CrudService;
 import com.thinkgem.jeesite.common.utils.StringUtils;
-import com.thinkgem.jeesite.test.entity.TestDataMain;
-import com.thinkgem.jeesite.test.dao.TestDataMainDao;
-import com.thinkgem.jeesite.test.entity.TestDataChild;
-import com.thinkgem.jeesite.test.dao.TestDataChildDao;
+import com.thinkgem.jeesite.modules.test.entity.TestDataMain;
+import com.thinkgem.jeesite.modules.test.dao.TestDataMainDao;
+import com.thinkgem.jeesite.modules.test.entity.TestDataChild;
+import com.thinkgem.jeesite.modules.test.dao.TestDataChildDao;
 
 /**
  * 主子表生成Service
  * @author ThinkGem
- * @version 2015-04-06
+ * @version 2015-05-26
  */
 @Service
 @Transactional(readOnly = true)

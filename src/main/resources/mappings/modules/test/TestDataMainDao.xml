@@ -1,40 +1,49 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.thinkgem.jeesite.test.dao.TestDataChildDao">
+<mapper namespace="com.thinkgem.jeesite.modules.test.dao.TestDataMainDao">
     
-	<sql id="testDataChildColumns">
+	<sql id="testDataMainColumns">
 		a.id AS "id",
-		a.test_data_main_id AS "testDataMain.id",
+		a.user_id AS "user.id",
+		a.office_id AS "office.id",
+		a.area_id AS "area.id",
 		a.name AS "name",
+		a.sex AS "sex",
+		a.in_date AS "inDate",
 		a.create_by AS "createBy.id",
 		a.create_date AS "createDate",
 		a.update_by AS "updateBy.id",
 		a.update_date AS "updateDate",
 		a.remarks AS "remarks",
-		a.del_flag AS "delFlag"
+		a.del_flag AS "delFlag",
+		u2.name AS "user.name",
+		o3.name AS "office.name",
+		a4.name AS "area.name"
 	</sql>
 	
-	<sql id="testDataChildJoins">
-		LEFT JOIN test_data_main b ON b.id = a.test_data_main_id
+	<sql id="testDataMainJoins">
+		LEFT JOIN sys_user u2 ON u2.id = a.user_id
+		LEFT JOIN sys_office o3 ON o3.id = a.office_id
+		LEFT JOIN sys_area a4 ON a4.id = a.area_id
 	</sql>
     
-	<select id="get" resultType="TestDataChild">
+	<select id="get" resultType="TestDataMain">
 		SELECT 
-			<include refid="testDataChildColumns"/>
-		FROM test_data_child a
-		<include refid="testDataChildJoins"/>
+			<include refid="testDataMainColumns"/>
+		FROM test_data_main a
+		<include refid="testDataMainJoins"/>
 		WHERE a.id = #{id}
 	</select>
 	
-	<select id="findList" resultType="TestDataChild">
+	<select id="findList" resultType="TestDataMain">
 		SELECT 
-			<include refid="testDataChildColumns"/>
-		FROM test_data_child a
-		<include refid="testDataChildJoins"/>
+			<include refid="testDataMainColumns"/>
+		FROM test_data_main a
+		<include refid="testDataMainJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
-			<if test="testDataMain != null and testDataMain.id != null and testDataMain.id != ''">
-				AND a.test_data_main_id = #{testDataMain.id}
+			<if test="user != null and user.id != null and user.id != ''">
+				AND a.user_id = #{user.id}
 			</if>
 			<if test="name != null and name != ''">
 				AND a.name LIKE 
@@ -42,22 +51,25 @@
 					<if test="dbName == 'mssql'">'%'+#{name}+'%'</if>
 					<if test="dbName == 'mysql'">concat('%',#{name},'%')</if>
 			</if>
+			<if test="sex != null and sex != ''">
+				AND a.sex = #{sex}
+			</if>
 		</where>
 		<choose>
 			<when test="page !=null and page.orderBy != null and page.orderBy != ''">
 				ORDER BY ${page.orderBy}
 			</when>
 			<otherwise>
-				ORDER BY a.create_date ASC
+				ORDER BY a.update_date DESC
 			</otherwise>
 		</choose>
 	</select>
 	
-	<select id="findAllList" resultType="TestDataChild">
+	<select id="findAllList" resultType="TestDataMain">
 		SELECT 
-			<include refid="testDataChildColumns"/>
-		FROM test_data_child a
-		<include refid="testDataChildJoins"/>
+			<include refid="testDataMainColumns"/>
+		FROM test_data_main a
+		<include refid="testDataMainJoins"/>
 		<where>
 			a.del_flag = #{DEL_FLAG_NORMAL}
 		</where>		
@@ -66,16 +78,20 @@
 				ORDER BY ${page.orderBy}
 			</when>
 			<otherwise>
-				ORDER BY a.create_date ASC
+				ORDER BY a.update_date DESC
 			</otherwise>
 		</choose>
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO test_data_child(
+		INSERT INTO test_data_main(
 			id,
-			test_data_main_id,
+			user_id,
+			office_id,
+			area_id,
 			name,
+			sex,
+			in_date,
 			create_by,
 			create_date,
 			update_by,
@@ -84,8 +100,12 @@
 			del_flag
 		) VALUES (
 			#{id},
-			#{testDataMain.id},
+			#{user.id},
+			#{office.id},
+			#{area.id},
 			#{name},
+			#{sex},
+			#{inDate},
 			#{createBy.id},
 			#{createDate},
 			#{updateBy.id},
@@ -96,9 +116,13 @@
 	</insert>
 	
 	<update id="update">
-		UPDATE test_data_child SET 	
-			test_data_main_id = #{testDataMain.id},
+		UPDATE test_data_main SET 	
+			user_id = #{user.id},
+			office_id = #{office.id},
+			area_id = #{area.id},
 			name = #{name},
+			sex = #{sex},
+			in_date = #{inDate},
 			update_by = #{updateBy.id},
 			update_date = #{updateDate},
 			remarks = #{remarks}
@@ -106,16 +130,9 @@
 	</update>
 	
 	<update id="delete">
-		UPDATE test_data_child SET 
+		UPDATE test_data_main SET 
 			del_flag = #{DEL_FLAG_DELETE}
-		<choose>
-			<when test="id !=null and id != ''">
-				WHERE id = #{id}
-			</when>
-			<otherwise>
-				WHERE test_data_main_id = #{testDataMain.id}
-			</otherwise>
-		</choose>
+		WHERE id = #{id}
 	</update>
 	
 </mapper>

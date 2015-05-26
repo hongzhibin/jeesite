@@ -1,7 +1,7 @@
 /**
  * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
-package com.thinkgem.jeesite.test.entity;
+package com.thinkgem.jeesite.modules.test.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import javax.validation.constraints.NotNull;
@@ -12,7 +12,7 @@ import com.thinkgem.jeesite.common.persistence.TreeEntity;
 /**
  * 树结构生成Entity
  * @author ThinkGem
- * @version 2015-04-06
+ * @version 2015-05-26
  */
 public class TestTree extends TreeEntity<TestTree> {
 	

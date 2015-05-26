@@ -1,7 +1,7 @@
 /**
  * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
-package com.thinkgem.jeesite.test.web;
+package com.thinkgem.jeesite.modules.test.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,13 +19,13 @@ import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.persistence.Page;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
-import com.thinkgem.jeesite.test.entity.TestDataMain;
-import com.thinkgem.jeesite.test.service.TestDataMainService;
+import com.thinkgem.jeesite.modules.test.entity.TestDataMain;
+import com.thinkgem.jeesite.modules.test.service.TestDataMainService;
 
 /**
  * 主子表生成Controller
  * @author ThinkGem
- * @version 2015-04-06
+ * @version 2015-05-26
  */
 @Controller
 @RequestMapping(value = "${adminPath}/test/testDataMain")
@@ -51,14 +51,14 @@ public class TestDataMainController extends BaseController {
 	public String list(TestDataMain testDataMain, HttpServletRequest request, HttpServletResponse response, Model model) {
 		Page<TestDataMain> page = testDataMainService.findPage(new Page<TestDataMain>(request, response), testDataMain); 
 		model.addAttribute("page", page);
-		return "jeesite/test/testDataMainList";
+		return "modules/test/testDataMainList";
 	}
 
 	@RequiresPermissions("test:testDataMain:view")
 	@RequestMapping(value = "form")
 	public String form(TestDataMain testDataMain, Model model) {
 		model.addAttribute("testDataMain", testDataMain);
-		return "jeesite/test/testDataMainForm";
+		return "modules/test/testDataMainForm";
 	}
 
 	@RequiresPermissions("test:testDataMain:edit")

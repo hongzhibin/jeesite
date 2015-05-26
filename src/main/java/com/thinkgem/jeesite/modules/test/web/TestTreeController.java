@@ -1,7 +1,7 @@
 /**
  * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
-package com.thinkgem.jeesite.test.web;
+package com.thinkgem.jeesite.modules.test.web;
 
 import java.util.List;
 import java.util.Map;
@@ -24,13 +24,13 @@ import com.google.common.collect.Maps;
 import com.thinkgem.jeesite.common.config.Global;
 import com.thinkgem.jeesite.common.web.BaseController;
 import com.thinkgem.jeesite.common.utils.StringUtils;
-import com.thinkgem.jeesite.test.entity.TestTree;
-import com.thinkgem.jeesite.test.service.TestTreeService;
+import com.thinkgem.jeesite.modules.test.entity.TestTree;
+import com.thinkgem.jeesite.modules.test.service.TestTreeService;
 
 /**
  * 树结构生成Controller
  * @author ThinkGem
- * @version 2015-04-06
+ * @version 2015-05-26
  */
 @Controller
 @RequestMapping(value = "${adminPath}/test/testTree")
@@ -56,7 +56,7 @@ public class TestTreeController extends BaseController {
 	public String list(TestTree testTree, HttpServletRequest request, HttpServletResponse response, Model model) {
 		List<TestTree> list = testTreeService.findList(testTree); 
 		model.addAttribute("list", list);
-		return "jeesite/test/testTreeList";
+		return "modules/test/testTreeList";
 	}
 
 	@RequiresPermissions("test:testTree:view")
@@ -81,7 +81,7 @@ public class TestTreeController extends BaseController {
 			testTree.setSort(30);
 		}
 		model.addAttribute("testTree", testTree);
-		return "jeesite/test/testTreeForm";
+		return "modules/test/testTreeForm";
 	}
 
 	@RequiresPermissions("test:testTree:edit")

@@ -1,18 +1,18 @@
 /**
  * Copyright &copy; 2012-2014 <a href="https://github.com/thinkgem/jeesite">JeeSite</a> All rights reserved.
  */
-package com.thinkgem.jeesite.test.dao;
+package com.thinkgem.jeesite.modules.test.dao;
 
 import com.thinkgem.jeesite.common.persistence.CrudDao;
 import com.thinkgem.jeesite.common.persistence.annotation.MyBatisDao;
-import com.thinkgem.jeesite.test.entity.TestDataChild;
+import com.thinkgem.jeesite.modules.test.entity.TestData;
 
 /**
- * 主子表生成DAO接口
+ * 单表生成DAO接口
  * @author ThinkGem
- * @version 2015-04-06
+ * @version 2015-05-26
  */
 @MyBatisDao
-public interface TestDataChildDao extends CrudDao<TestDataChild> {
+public interface TestDataDao extends CrudDao<TestData> {
 	
 }
